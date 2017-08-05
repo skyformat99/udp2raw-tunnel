@@ -1,7 +1,7 @@
 # Udp2raw-tunnel
-An Encrpyted,Anti-Replay,Multiplexed Udp Tunnel,tunnels udp traffic through raw socket,send/recv udp packet as raw packet with fake tcp/icmp header. Which can help you bypass udp blocking or udp qos. It also supports sending raw packet as udp packet,in this way you can just may use of the encrpyting and anti-replay feature.Nat supported in all 3 modes.
+An Encrpyted,Anti-Replay,Multiplexed Udp Tunnel,tunnels udp traffic through raw socket,send/recv udp packet as raw packet with fake tcp/icmp header. Which can help you bypass udp blocking or udp QOS. It also supports sending raw packet as udp packet,in this way you can just may use of the encrpyting and anti-replay feature.NAT supported in all 3 modes.
 
-In tcp mode simulated 3-way hand-shake,simluated seq ack_seq implemented. Those tcp options are also implemented:MSS,sackOk,TS,TS_ack,wscale  
+In tcp mode simulated 3-way hand-shake,simluated seq ack_seq implemented. Those tcp options are also simluated:MSS,sackOk,TS,TS_ack,wscale  
 
 ## Getting Started
 
