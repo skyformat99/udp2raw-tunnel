@@ -2,18 +2,19 @@
 An Encrpyted,Anti-Replay,Multiplexed Udp Tunnel,tunnels udp traffic through raw socket
 ### Send/Recv Udp Packet as Raw Packet with TCP header,ICMP header
 Which can help you bypass udp blocking or udp QOS or just poorly supported udp NAT behavior by some ISP. Raw packet with UDP header is also supported,in this way you can just make use of the encrpyting and anti-replay feature.
-### NAT Supported
-all 3 modes work in NAT environment 
 ### Encrpytion and Anti-Replay
 encrypt your traffic with aes128cbc,protects data integrity by md5 or crc32,protect replay attack with an anti-replay window smiliar to ipsec/openvpn.
 ### Simulated TCP Connection
 simulated 3-way hand-shake,simluated seq ack_seq implemented. Simluated tcp options:MSS,sackOk,TS,TS_ack,wscale. provides real-time delivery ,no tcp over tcp problem when using openvpn.
 ### Connnection Recover
 After connection timeouts,the client will re-connect.if re-connection is successful,the previous connection will be recovered,and all old udp conversations will stay vaild.
-### Multiplexing
-one client supports multi udp connections,all of those traffic will share one raw connection
-### Multiple Client Support
-one server supports multi client.not needed to deploy a server for each client 
+### Other Features
+NAT Supported,all 3 modes work in NAT environment 
+
+Multiplexing ,one client supports multi udp connections,all of those traffic will share one raw connection
+
+Multiple Client Support,one server supports multiple client.
+
 # Getting Started
 ### Prerequisites
 linux host,root access.  if you want to use it on window,you can use VMware in bridged mode.
