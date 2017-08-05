@@ -1,7 +1,13 @@
 # Udp2raw-tunnel
-An Encrpyted,Anti-Replay,Multiplexed Udp Tunnel,tunnels udp traffic through raw socket,send/recv udp packet as raw packet with fake tcp/icmp header. Which can help you bypass udp blocking or udp QOS. It also supports sending raw packet as udp packet,in this way you can just may use of the encrpyting and anti-replay feature.NAT supported in all 3 modes.
+An Encrpyted,Anti-Replay,Multiplexed Udp Tunnel,tunnels udp traffic through raw socket,send/recv udp packet as raw packet with fake tcp/icmp header. Which can help you bypass udp blocking or udp QOS. It also supports sending raw packet as udp packet,in this way you can just make use of the encrpyting and anti-replay feature.NAT supported in all 3 modes.
 
-In tcp mode simulated 3-way hand-shake,simluated seq ack_seq implemented. Those tcp options are also simluated:MSS,sackOk,TS,TS_ack,wscale  
+## Encrpyted,Anti-Replay
+
+## tcp simulation
+simulated 3-way hand-shake,simluated seq ack_seq implemented. Simluated tcp options:MSS,sackOk,TS,TS_ack,wscale  
+
+ 
+
 
 ## Getting Started
 
@@ -74,7 +80,7 @@ Its suggested to use aes128cbc + md5 to obtain maxmized security.If you want to 
 the faketcp mode doest not behave 100% like a real tcp connection.ISP may be able to distinguish the simulated tcp traffic from real tcp traffic(though its costly). seq-mode can help you changed the seq increase behavior a bit. If you experienced problems,try to change the value. 
 
 
-## application
+## Application
 ### tunneling openvpn
 1. bypass tcp ovr tcp problem when udp is not avaliable. 
 (tcp over tcp problem http://sites.inka.de/bigred/devel/tcp-tcp.html)
@@ -90,3 +96,17 @@ tested
 finalspeed 's tcp mode doesnt work on openvz VPS.you can use finalspeed 's udp mode,and tunnel udp through tcp with this tunnel.
 
 tested
+
+
+## Related work
+
+### kcptun-raw
+
+this project is inpired by kcptun-raw,which modified kcptun to support tcp mode.
+
+https://github.com/Chion82/kcptun-raw
+
+### relayRawSocket
+a simple  udp to raw tunnel without simluated 3-way handshake wrote in python
+
+https://github.com/linhua55/some_kcptun_tools/tree/master/relayRawSocket
