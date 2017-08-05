@@ -4,8 +4,8 @@ An Encrpyted,Anti-Replay,Multiplexed Udp Tunnel,tunnels udp traffic through raw 
 Which can help you bypass udp blocking or udp QOS or just poorly supported udp NAT behavior by some ISP. Raw packet with UDP header is also supported,in this way you can just make use of the encrpyting and anti-replay feature.
 ### Encrpytion and Anti-Replay
 encrypt your traffic with aes128cbc,protects data integrity by md5 or crc32,protect replay attack with an anti-replay window smiliar to ipsec/openvpn.
-### Simulated TCP Connection
-simulated 3-way hand-shake,simluated seq ack_seq implemented. Simluated tcp options:MSS,sackOk,TS,TS_ack,wscale. provides real-time delivery ,no tcp over tcp problem when using openvpn.
+### Simulated TCP
+simulated 3-way hand-shake,simluated seq ack_seq. Simluated tcp options:MSS,sackOk,TS,TS_ack,wscale. provides real-time delivery ,no tcp over tcp problem when using openvpn.
 ### Connnection Recover
 After connection timeouts,the client will re-connect.if re-connection is successful,the previous connection will be recovered,and all old udp conversations will stay vaild.
 ### Other Features
@@ -96,10 +96,13 @@ finalspeed 's tcp mode doesnt work on openvz VPS.you can use finalspeed 's udp m
 # Related work
 ### kcptun-raw
 this project was inspired by kcptun-raw,which modified kcptun to support tcp mode.
+
 https://github.com/Chion82/kcptun-raw
 ### relayRawSocket
 a simple  udp to raw tunnel without simluated 3-way handshake ,wrote in python
+
 https://github.com/linhua55/some_kcptun_tools/tree/master/relayRawSocket
 ### icmptunnel
 Transparently tunnel your IP traffic through ICMP echo and reply packets.
+
 https://github.com/DhavalKapil/icmptunnel
