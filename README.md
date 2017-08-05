@@ -9,12 +9,13 @@ simulated 3-way hand-shake,simluated seq ack_seq. Simluated tcp options:MSS,sack
 ### Connnection Recover
 After connection timeouts,the client will re-connect.if re-connection is successful,the previous connection will be recovered,and all old udp conversations will stay vaild.
 ### Other Features
-NAT Supported,all 3 modes work in NAT environment 
-
 Multiplexing ,one client supports multi udp connections,all of those traffic will share one raw connection
 
 Multiple Client Support,one server supports multiple client.
 
+NAT Supported,all 3 modes work in NAT environment 
+
+OpenVZ Supported,tested on bandwagonhost
 # Getting Started
 ### Prerequisites
 linux host,root access.  if you want to use it on window,you can use VMware in bridged mode.
