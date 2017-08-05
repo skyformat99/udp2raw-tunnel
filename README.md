@@ -16,6 +16,8 @@ Multiple Client Support,one server supports multiple client.
 NAT Supported,all 3 modes work in NAT environment 
 
 OpenVZ Supported,tested on bandwagonhost
+
+Openwrt Supported,no dependence packet,easy to compile,ar71xx binary included in release.
 ### Key Words
 bypass udp qos,bypass udp blocking,openvpn tcp over tcp problem,openvpn over icmp,udp to icmp tunnel,udp to tcp tunnel,udp via icmp,udp via tcp
 # Getting Started
