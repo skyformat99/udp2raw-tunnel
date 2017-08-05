@@ -1,43 +1,26 @@
 # Udp2raw-tunnel
 An Encrpyted,Anti-Replay,Multiplexed Udp Tunnel,tunnels udp traffic through raw socket
-
 ### Send/Recv Udp Packet as Raw Packet with TCP header,ICMP header
-Which can help you bypass udp blocking or udp QOS or just poorly supported udp NAT behavior by some ISP. 
-
-Raw packet with UDP header is also supported,in this way you can just make use of the encrpyting and anti-replay feature.
-
+Which can help you bypass udp blocking or udp QOS or just poorly supported udp NAT behavior by some ISP. Raw packet with UDP header is also supported,in this way you can just make use of the encrpyting and anti-replay feature.
 ### NAT Supported
 all 3 modes work in NAT environment 
-
 ### Encrpytion and Anti-Replay
 encrypt your traffic with aes128cbc,protects data integrity by md5 or crc32,protect replay attack with an anti-replay window smiliar to ipsec/openvpn.
-
 ### Simulated TCP by raw socket 
-simulated 3-way hand-shake,simluated seq ack_seq implemented. Simluated tcp options:MSS,sackOk,TS,TS_ack,wscale. 
-
-provides real-time delivery ,no tcp over tcp problem when using openvpn.
-
+simulated 3-way hand-shake,simluated seq ack_seq implemented. Simluated tcp options:MSS,sackOk,TS,TS_ack,wscale. provides real-time delivery ,no tcp over tcp problem when using openvpn.
 ### Connnection Recover
 After connection is timeouts,the client will re-connect.if re-connection is successful,the previous connection will be recovered,and all old udp connections will stay vaild.
-
 ### Multiplexing
 one client supports multi udp connections,all of those traffice will share one raw connection
-
 ### Multiple Client Support
 one server supports multi client.not needed to deploy a server for each client 
-
 # Getting Started
-
 ### Prerequisites
-linux host,root access
-
+linux host,root access.  if you want to use it on window,you can use vmware bridged mode.
 ### Installing
 download binary release from https://github.com/wangyu-/udp2raw-tunnel/releases
-
 ### Running 
-assume your udp is blocked or being QOS-ed or just poorly supported.
-
-assume your server ip is 44.55.66.77, you have a service listening on udp port 7777.
+assume your udp is blocked or being QOS-ed or just poorly supported.assume your server ip is 44.55.66.77, you have a service listening on udp port 7777.
 ```
 run at client side:
 ./udp2raw_amd64 -c -l0.0.0.0:3333  -r44.55.66.77:4096 -a -k "passwd" --raw-mode faketcp
@@ -48,9 +31,7 @@ run at server side:
 
 ```
 Now,your client and server established a tunnel thorough tcp port 4096. Connecting to udp port 3333 at client side  is equivalent with connecting to port 7777 at server side. No udp traffic will be exposed to outside.
-
 # Advanced Topic
-
 ### Usage
 ```
 udp2raw-tunnel
@@ -89,14 +70,10 @@ other options:
 ```
 ### iptables rule
 this programs sends packet via raw socket.In faketcp mode,Linux Kernel TCP packet processing has to be blocked by a iptables rule on both side,otherwise Kernel will automatically send RST for unrecongized TCP packet and you will sustain from stability/peformance problem.You can use -a option to let the program automatically add/del iptables rules on start/exit.You can also use the -g option to generate iptables rule and add it manually.
-
 ### cipher-mode and auth-mode 
 Its suggested to use aes128cbc + md5 to obtain maxmized security.If you want to run the program on a router,you can try xor+simple,it can fool Packet Inspection by firewalls most time, but it cant protect you from serious attackers. Mode none is only for debug,its not suggest to set cipher-mode or auth-mode to none.
-
 ### seq-mode
 the faketcp mode doest not behave 100% like a real tcp connection.ISP may be able to distinguish the simulated tcp traffic from real tcp traffic(though its costly). seq-mode can help you changed the seq increase behavior a bit. If you experienced problems,try to change the value. 
-
-
 # Application
 ### tunneling openvpn
 1. bypass tcp ovr tcp problem when udp is not avaliable. 
@@ -116,17 +93,12 @@ finalspeed 's tcp mode doesnt work on openvz VPS.you can use finalspeed 's udp m
 
 
 # Related work
-
 ### kcptun-raw
 this project was inspired by kcptun-raw,which modified kcptun to support tcp mode.
-
 https://github.com/Chion82/kcptun-raw
-
 ### relayRawSocket
 a simple  udp to raw tunnel without simluated 3-way handshake wrote in python
-
 https://github.com/linhua55/some_kcptun_tools/tree/master/relayRawSocket
-
 ### icmptunnel
-Transparently tunnel your IP traffic through ICMP echo and reply packets.Currently cant pass through NAT.
+Transparently tunnel your IP traffic through ICMP echo and reply packets.
 https://github.com/DhavalKapil/icmptunnel
