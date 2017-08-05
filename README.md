@@ -1,15 +1,32 @@
 # Udp2raw-tunnel
-An Encrpyted,Anti-Replay,Multiplexed Udp Tunnel,tunnels udp traffic through raw socket,send/recv udp packet as raw packet with fake tcp/icmp header. Which can help you bypass udp blocking or udp QOS. It also supports sending raw packet as udp packet,in this way you can just make use of the encrpyting and anti-replay feature.NAT supported in all 3 modes.
+An Encrpyted,Anti-Replay,Multiplexed Udp Tunnel,tunnels udp traffic through raw socket
 
-## Encrpyted,Anti-Replay
+### Send/Recv Udp Packet as Raw Packet with TCP header,ICMP header
+Which can help you bypass udp blocking or udp QOS or just poorly supported udp NAT behavior by some ISP. 
 
-## tcp simulation
-simulated 3-way hand-shake,simluated seq ack_seq implemented. Simluated tcp options:MSS,sackOk,TS,TS_ack,wscale  
+Raw packet with UDP header is also supported,in this way you can just make use of the encrpyting and anti-replay feature.
 
- 
+### NAT Supported
+all 3 modes work in NAT environment 
 
+### Encrpytion and Anti-Replay
+encrypt your traffic with aes128cbc,protects data integrity by md5 or crc32,protect replay attack with an anti-replay window smiliar to ipsec/openvpn.
 
-## Getting Started
+### Simulated TCP by raw socket 
+simulated 3-way hand-shake,simluated seq ack_seq implemented. Simluated tcp options:MSS,sackOk,TS,TS_ack,wscale. 
+
+provides real-time delivery ,no tcp over tcp problem when using openvpn.
+
+### Connnection Recover
+After connection is timeouts,the client will re-connect.if re-connection is successful,the previous connection will be recovered,and all old udp connections will stay vaild.
+
+### Multiplexing
+one client supports multi udp connections,all of those traffice will share one raw connection
+
+### Multiple Client Support
+one server supports multi client.not needed to deploy a server for each client 
+
+# Getting Started
 
 ### Prerequisites
 linux host,root access
@@ -32,7 +49,7 @@ run at server side:
 ```
 Now,your client and server established a tunnel thorough tcp port 4096. Connecting to udp port 3333 at client side  is equivalent with connecting to port 7777 at server side. No udp traffic will be exposed to outside.
 
-## Advanced Topic
+# Advanced Topic
 
 ### Usage
 ```
@@ -80,29 +97,28 @@ Its suggested to use aes128cbc + md5 to obtain maxmized security.If you want to 
 the faketcp mode doest not behave 100% like a real tcp connection.ISP may be able to distinguish the simulated tcp traffic from real tcp traffic(though its costly). seq-mode can help you changed the seq increase behavior a bit. If you experienced problems,try to change the value. 
 
 
-## Application
+# Application
 ### tunneling openvpn
 1. bypass tcp ovr tcp problem when udp is not avaliable. 
 (tcp over tcp problem http://sites.inka.de/bigred/devel/tcp-tcp.html)
 2. openopvn via icmp
 
-tested
+//todo
 ### tunneling kcptun
 make kcptun support tcp mode.
 (kcptun, https://github.com/xtaci/kcptun)
 
-tested
+//todo
 ### tunneling finalspeed
 finalspeed 's tcp mode doesnt work on openvz VPS.you can use finalspeed 's udp mode,and tunnel udp through tcp with this tunnel.
 
-tested
+//todo
 
 
-## Related work
+# Related work
 
 ### kcptun-raw
-
-this project is inpired by kcptun-raw,which modified kcptun to support tcp mode.
+this project was inspired by kcptun-raw,which modified kcptun to support tcp mode.
 
 https://github.com/Chion82/kcptun-raw
 
@@ -110,3 +126,7 @@ https://github.com/Chion82/kcptun-raw
 a simple  udp to raw tunnel without simluated 3-way handshake wrote in python
 
 https://github.com/linhua55/some_kcptun_tools/tree/master/relayRawSocket
+
+### icmptunnel
+Transparently tunnel your IP traffic through ICMP echo and reply packets.Currently cant pass through NAT.
+https://github.com/DhavalKapil/icmptunnel
