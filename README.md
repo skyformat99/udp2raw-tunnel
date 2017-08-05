@@ -21,7 +21,7 @@ run at client side:
 
 run at server side:
 
-./udp2raw -s -l0.0.0.0:4096 -r 127.0.0.1:7777  -a -k "passwd" --raw-mode faketcp
+./udp2raw_amd64 -s -l0.0.0.0:4096 -r 127.0.0.1:7777  -a -k "passwd" --raw-mode faketcp
 
 ```
 Now,your client and server established a tunnel thorough tcp port 4096. Connecting to udp port 3333 at client side  is equivalent with connecting to port 7777 at server side. No udp traffic will be exposed to outside.
@@ -72,3 +72,21 @@ Its suggested to use aes128cbc + md5 to obtain maxmized security.If you want to 
 
 ### seq-mode
 the faketcp mode doest not behave 100% like a real tcp connection.ISP may be able to distinguish the simulated tcp traffic from real tcp traffic(though its costly). seq-mode can help you changed the seq increase behavior a bit. If you experienced problems,try to change the value. 
+
+
+## application
+### tunneling openvpn
+1. bypass tcp ovr tcp problem when udp is not avaliable. 
+(tcp over tcp problem http://sites.inka.de/bigred/devel/tcp-tcp.html)
+2. openopvn via icmp
+
+tested
+### tunneling kcptun
+make kcptun support tcp mode.
+(kcptun, https://github.com/xtaci/kcptun)
+
+tested
+### tunneling finalspeed
+finalspeed 's tcp mode doesnt work on openvz VPS.you can use finalspeed 's udp mode,and tunnel udp through tcp with this tunnel.
+
+tested
